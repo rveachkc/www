@@ -32,19 +32,14 @@ old WordPress `/feed/` URL to `/feed.xml`. DNS for the domain is hosted on Digit
 `zone: ryanveach.com` on each domain lets App Platform manage those records itself. Leave the
 Google Workspace MX records alone.
 
-## Enabling comments (giscus)
+## Comments (giscus)
 
-Comments use [giscus](https://giscus.app) (GitHub Discussions). They are wired up but disabled
-because giscus needs a **public** repo. When ready:
+Post comments use [giscus](https://giscus.app), backed by GitHub Discussions in this repo's
+**Comments** category (Announcement format, so only giscus and maintainers open threads). Each
+post maps to a discussion titled with its URL path, created on the first comment. Settings are
+under `comments:` in `_config.yml`; the giscus GitHub App must stay installed on the repo.
 
-1. Make `rveachkc/www` public.
-2. Settings → Features → enable **Discussions**, and create a category named **Comments** with
-   the **Announcement** format, so only maintainers and giscus can open new threads.
-3. Install the [giscus GitHub App](https://github.com/apps/giscus) on the repo.
-4. On [giscus.app](https://giscus.app), enter the repo and choose the Comments category and
-   the "pathname" mapping, then copy `data-repo-id` and `data-category-id`.
-5. In `_config.yml`, set `comments.provider: giscus` and fill in `repo_id` and `category_id`.
-6. Push, then leave a test comment and check that a Discussion titled with the post's path appears.
+To disable comments on one post, add `comments: false` to its front matter.
 
 ## WordPress migration
 

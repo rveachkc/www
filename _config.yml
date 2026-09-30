@@ -44,13 +44,13 @@ footer:
       url: https://www.linkedin.com/in/ryanveach/
 
 # Comments via giscus (GitHub Discussions).
-# Disabled until the repo is public -- see README "Enabling comments".
+# Posts map to discussions in the "Comments" category by URL path.
 comments:
-  provider: # giscus
+  provider: giscus
   giscus:
-    repo_id: # R_xxxxxxxx
+    repo_id: R_kgDOU0Bf4w
     category_name: Comments
-    category_id: # DIC_xxxxxxxx
+    category_id: DIC_kwDOU0Bf484DGshi
     discussion_term: pathname
     reactions_enabled: 1
     theme: catppuccin_mocha # match the site skin
