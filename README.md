@@ -27,12 +27,10 @@ To change app settings, edit `.do/app.yaml`, then paste it into the DigitalOcean
 (App → Settings → App Spec → Edit). Console edits aren't synced back to the repo, so copy any
 changes made there into this file.
 
-The spec 301-redirects the old WordPress `/feed/` URL to `/feed.xml`.
-
-DNS for `ryanveach.com` is hosted on DigitalOcean. At cutover, add both domains to the spec with
-`zone: ryanveach.com` so App Platform manages their records, plus the `www` → apex redirect rule
-commented at the bottom of the spec. First remove any conflicting A records in
-Networking → Domains.
+The spec serves `ryanveach.com` and 301-redirects `www.ryanveach.com` to it, and redirects the
+old WordPress `/feed/` URL to `/feed.xml`. DNS for the domain is hosted on DigitalOcean, and the
+`zone: ryanveach.com` on each domain lets App Platform manage those records itself. Leave the
+Google Workspace MX records alone.
 
 ## Enabling comments (giscus)
 

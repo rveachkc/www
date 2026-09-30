@@ -29,10 +29,20 @@ static_sites:
 
 ingress:
   rules:
-    # old WordPress feed URL
+    # www -> apex
+    - match:
+        authority:
+          exact: www.ryanveach.com
+        path:
+          prefix: /
+      redirect:
+        authority: ryanveach.com
+        redirect_code: 301
+    # old WordPress feed URLs (/feed, /feed/, /feed/atom/, ...); prefixes match whole
+    # path segments, so /feed.xml itself is not caught
     - match:
         path:
-          prefix: /feed/
+          prefix: /feed
       redirect:
         uri: /feed.xml
         redirect_code: 301
@@ -42,14 +52,10 @@ ingress:
       component:
         name: www
 
-# Domains are added at DNS cutover time (see README "Deployment"), together with
-# this ingress rule, placed first -- App Platform rejects it until www.ryanveach.com
-# is a domain in the spec:
-#
-#    # www -> apex
-#    - match:
-#        authority:
-#          exact: www.ryanveach.com
-#      redirect:
-#        authority: ryanveach.com
-#        redirect_code: 301
+domains:
+  - domain: www.ryanveach.com
+    type: ALIAS
+    zone: ryanveach.com
+  - domain: ryanveach.com
+    type: PRIMARY
+    zone: ryanveach.com
