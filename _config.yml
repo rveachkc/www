@@ -25,6 +25,11 @@ author:
     - label: GitLab
       icon: fab fa-fw fa-gitlab
       url: https://gitlab.com/rveach
+    - label: LinkedIn
+      icon: fab fa-fw fa-linkedin
+      url: https://www.linkedin.com/in/ryanveach/
+
+copyright_url: / # footer copyright link; defaults to site.url, which is http://0.0.0.0:4000 under jekyll serve
 
 footer:
   links:
@@ -34,6 +39,9 @@ footer:
     - label: GitLab
       icon: fab fa-fw fa-gitlab
       url: https://gitlab.com/rveach
+    - label: LinkedIn
+      icon: fab fa-fw fa-linkedin
+      url: https://www.linkedin.com/in/ryanveach/
 
 # Comments via giscus (GitHub Discussions).
 # Disabled until the repo is public -- see README "Enabling comments".
