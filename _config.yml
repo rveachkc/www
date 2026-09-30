@@ -1,0 +1,112 @@
+# Site settings
+theme: minimal-mistakes-jekyll
+minimal_mistakes_skin: default # air, aqua, contrast, dark, dirt, neon, mint, plum, sunrise
+
+locale: en-US
+title: ryanveach.com
+title_separator: "|"
+subtitle: My Digital Outlet
+name: Ryan Veach
+description: My Digital Outlet
+url: https://ryanveach.com
+baseurl: ""
+repository: rveachkc/www # used by giscus
+timezone: America/Chicago
+search: true
+breadcrumbs: false
+
+author:
+  name: Ryan Veach
+  bio: My Digital Outlet
+  links:
+    - label: GitHub
+      icon: fab fa-fw fa-github
+      url: https://github.com/rveachkc
+    - label: GitLab
+      icon: fab fa-fw fa-gitlab
+      url: https://gitlab.com/rveach
+
+footer:
+  links:
+    - label: GitHub
+      icon: fab fa-fw fa-github
+      url: https://github.com/rveachkc
+    - label: GitLab
+      icon: fab fa-fw fa-gitlab
+      url: https://gitlab.com/rveach
+
+# Comments via giscus (GitHub Discussions).
+# Disabled until the repo is public -- see README "Enabling comments".
+comments:
+  provider: # giscus
+  giscus:
+    repo_id: # R_xxxxxxxx
+    category_name: Comments
+    category_id: # DIC_xxxxxxxx
+    discussion_term: pathname
+    reactions_enabled: 1
+    theme: preferred_color_scheme
+    lazy: true
+
+# Reading / building
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+permalink: /:year/:month/:day/:title/
+paginate: 5
+paginate_path: /page:num/
+
+include:
+  - _pages
+exclude:
+  - "*.WordPress.*.xml"
+  - import/
+  - scripts/
+  - vendor/
+  - .do/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - serve_dev.sh
+
+plugins:
+  - jekyll-feed
+  - jekyll-gist
+  - jekyll-include-cache
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      share: true
+      related: true
+      comments: true
+      show_date: true
+  - scope:
+      path: _pages
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
+# Theme's vendored Sass triggers upstream deprecation warnings; hide them
+sass:
+  quiet_deps: true
+  silence_deprecations: [import, global-builtin, color-functions, slash-div]

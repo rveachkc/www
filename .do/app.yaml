@@ -1,0 +1,48 @@
+# DigitalOcean App Platform spec
+#   create:  doctl apps create --spec .do/app.yaml
+#   update:  doctl apps update <app-id> --spec .do/app.yaml
+name: ryanveach-www
+region: nyc
+
+static_sites:
+  - name: www
+    github:
+      repo: rveachkc/www
+      branch: main
+      deploy_on_push: true
+    environment_slug: jekyll
+    build_command: bundle exec jekyll build
+    output_dir: _site
+    error_document: 404.html
+    envs:
+      - key: JEKYLL_ENV
+        value: production
+        scope: BUILD_TIME
+
+ingress:
+  rules:
+    # www -> apex
+    - match:
+        authority:
+          exact: www.ryanveach.com
+      redirect:
+        authority: ryanveach.com
+        redirect_code: 301
+    # old WordPress feed URL
+    - match:
+        path:
+          prefix: /feed/
+      redirect:
+        uri: /feed.xml
+        redirect_code: 301
+    - match:
+        path:
+          prefix: /
+      component:
+        name: www
+
+domains:
+  - domain: ryanveach.com
+    type: PRIMARY
+  - domain: www.ryanveach.com
+    type: ALIAS
