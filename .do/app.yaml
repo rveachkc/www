@@ -1,8 +1,15 @@
-# DigitalOcean App Platform spec
-#   create:  doctl apps create --spec .do/app.yaml
-#   update:  doctl apps update <app-id> --spec .do/app.yaml
+# DigitalOcean App Platform spec.
+# Apply in the console: App → Settings → App Spec → Edit, paste this file, Save.
+# Console edits are not synced back here -- copy changes into this file.
 name: ryanveach-www
 region: nyc
+
+features:
+  - buildpack-stack=ubuntu-22
+
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
 
 static_sites:
   - name: www
@@ -10,6 +17,7 @@ static_sites:
       repo: rveachkc/www
       branch: main
       deploy_on_push: true
+    source_dir: /
     environment_slug: jekyll
     build_command: bundle exec jekyll build
     output_dir: _site
@@ -21,13 +29,6 @@ static_sites:
 
 ingress:
   rules:
-    # www -> apex
-    - match:
-        authority:
-          exact: www.ryanveach.com
-      redirect:
-        authority: ryanveach.com
-        redirect_code: 301
     # old WordPress feed URL
     - match:
         path:
@@ -41,8 +42,14 @@ ingress:
       component:
         name: www
 
-domains:
-  - domain: ryanveach.com
-    type: PRIMARY
-  - domain: www.ryanveach.com
-    type: ALIAS
+# Domains are added at DNS cutover time (see README "Deployment"), together with
+# this ingress rule, placed first -- App Platform rejects it until www.ryanveach.com
+# is a domain in the spec:
+#
+#    # www -> apex
+#    - match:
+#        authority:
+#          exact: www.ryanveach.com
+#      redirect:
+#        authority: ryanveach.com
+#        redirect_code: 301

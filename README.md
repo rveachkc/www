@@ -23,12 +23,16 @@ optional `header.overlay_image` / `header.teaser`. Images live in `assets/images
 
 `.do/app.yaml` is the App Platform spec. Pushes to `main` deploy automatically.
 
-```sh
-doctl apps create --spec .do/app.yaml          # first time
-doctl apps update <app-id> --spec .do/app.yaml # after editing the spec
-```
+To change app settings, edit `.do/app.yaml`, then paste it into the DigitalOcean console
+(App → Settings → App Spec → Edit). Console edits aren't synced back to the repo, so copy any
+changes made there into this file.
 
-The spec also 301-redirects `www.` to the apex and the old WordPress `/feed/` URL to `/feed.xml`.
+The spec 301-redirects the old WordPress `/feed/` URL to `/feed.xml`.
+
+DNS for `ryanveach.com` is hosted on DigitalOcean. At cutover, add both domains to the spec with
+`zone: ryanveach.com` so App Platform manages their records, plus the `www` → apex redirect rule
+commented at the bottom of the spec. First remove any conflicting A records in
+Networking → Domains.
 
 ## Enabling comments (giscus)
 
