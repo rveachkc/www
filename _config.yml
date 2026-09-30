@@ -1,6 +1,6 @@
 # Site settings
 theme: minimal-mistakes-jekyll
-minimal_mistakes_skin: default # air, aqua, contrast, dark, dirt, neon, mint, plum, sunrise
+minimal_mistakes_skin: catppuccin_mocha # air, aqua, catppuccin_latte, contrast, dark, default, dirt, neon, mint, plum, sunrise
 
 locale: en-US
 title: ryanveach.com
@@ -45,7 +45,7 @@ comments:
     category_id: # DIC_xxxxxxxx
     discussion_term: pathname
     reactions_enabled: 1
-    theme: preferred_color_scheme
+    theme: catppuccin_mocha # match the site skin
     lazy: true
 
 # Reading / building
